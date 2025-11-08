@@ -1,0 +1,11 @@
+scikit-learn
+matplotlib
+pandas 
+numpy
+xgboost
+streamlit
+google-genai
+pydantic
+dotenv
+ipykernel
+kagglehub
