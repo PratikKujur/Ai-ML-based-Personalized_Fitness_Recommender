@@ -14,18 +14,15 @@ from src.utils import (
 )
 
 load_dotenv()
-#api_key = os.getenv("GEMINI_API_KEY")
-api_key=st.secrets["GEMINI_API_KEY"]
+# api_key = os.getenv("GEMINI_API_KEY")
+api_key = st.secrets["GEMINI_API_KEY"]
 client = genai.Client(api_key=api_key)
-
 
 
 @st.cache_resource
 def load_model():
     model_path = os.path.join(os.getcwd(), "models", "exercise_recommender.pkl")
-    return joblib.load(
-        model_path
-    )
+    return joblib.load(model_path)
 
 
 model = load_model()
@@ -110,7 +107,7 @@ with st.form("user_input_form"):
 
         st.markdown("### 🧾 Your Profile Summary")
         st.dataframe(user_input, use_container_width=True)
-        user_input = preprocess_for_xgb(user_input,cat_features=CATEGORICAL_COLS)
+        user_input = preprocess_for_xgb(user_input, cat_features=CATEGORICAL_COLS)
         top_10_response = model.predict_proba(user_input)
         top_10_indices = top_10_response[0].argsort()[-10:][::-1]
         ranked_exercises = [map_exercises[i] for i in top_10_indices]
@@ -143,7 +140,7 @@ if "ranked_exercises" in st.session_state and "user_profile" in st.session_state
                 prompt = f"""
                 You are an expert fitness coach.
                 Based on this user profile: {user_profile},
-                and top exercises: {', '.join(ranked_exercises['Exercise'])},
+                and top exercises: {", ".join(ranked_exercises["Exercise"])},
                 generate a personalized 3-day workout plan.
                 Include exercises, sets, reps, rest time, and motivation tips.
                 """
