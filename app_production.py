@@ -94,7 +94,9 @@ if "ranked_exercises" in st.session_state and "user_profile" in st.session_state
 
     exercise_plan_inputs = {
         "user_profile": user_profile_for_plan,
-        "top_10_exercises": top_exs_for_plan if isinstance(top_exs_for_plan, list) else [],
+        "top_10_exercises": top_exs_for_plan
+        if isinstance(top_exs_for_plan, list)
+        else [],
     }
 
     col1, col2 = st.columns(2)
@@ -114,11 +116,13 @@ if "ranked_exercises" in st.session_state and "user_profile" in st.session_state
                     if schedule_text:
                         st.write(schedule_text)
                     else:
-                        st.error(f"Missing 'exercise_schedule' in response: {resp.text}")
+                        st.error(
+                            f"Missing 'exercise_schedule' in response: {resp.text}"
+                        )
 
                 except requests.exceptions.HTTPError as e:
                     # Surface server response body (helpful for 422 parse errors)
-                    resp_obj = getattr(e, 'response', None)
+                    resp_obj = getattr(e, "response", None)
                     body = None
                     try:
                         if resp_obj is not None:
@@ -147,7 +151,7 @@ if "ranked_exercises" in st.session_state and "user_profile" in st.session_state
                         st.error(f"Missing 'meal_schedule' in response: {resp.text}")
 
                 except requests.exceptions.HTTPError as e:
-                    resp_obj = getattr(e, 'response', None)
+                    resp_obj = getattr(e, "response", None)
                     body = None
                     try:
                         if resp_obj is not None:
@@ -157,8 +161,3 @@ if "ranked_exercises" in st.session_state and "user_profile" in st.session_state
                     st.error(f"HTTP error: {e}. Response body: {body}")
                 except Exception as e:
                     st.error(f"Failed to send error:{e}")
-
-
-
-
-
