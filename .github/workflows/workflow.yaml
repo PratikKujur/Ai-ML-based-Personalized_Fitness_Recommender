@@ -8,10 +8,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      AWS_REGION: ${{ secrets.AWS_REGION }}
-      AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
