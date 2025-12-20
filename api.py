@@ -56,7 +56,7 @@ def get_top_exercises(info: FitnessInfo):
     }
 
     with open(
-        "D:/Projects/Ai-ML-based-Personalized_Fitness_Recommender/models/exercise_recommender.pkl",
+        "models/exercise_recommender.pkl",
         "rb",
     ) as f:
         model = joblib.load(f)
