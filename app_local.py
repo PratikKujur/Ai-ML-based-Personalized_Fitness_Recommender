@@ -13,7 +13,6 @@ from src.utils import (
     dropna_func,
 )
 
-
 load_dotenv()
 #api_key = os.getenv("GEMINI_API_KEY")
 api_key=st.secrets["GEMINI_API_KEY"]
